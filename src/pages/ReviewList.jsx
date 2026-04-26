@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { Edit, Trash2 } from "lucide-react";
 import toast from "react-hot-toast";
 import Modal from "../components/Modal";
+import Pagination from "../components/Paginaion";
 
 const ReviewList = () => {
   const [reviews, setReviews] = useState([]);
@@ -175,27 +176,11 @@ const ReviewList = () => {
           </tbody>
         </table>
 
-        <div className="p-4 flex justify-end items-center gap-4 bg-gray-50">
-          <span className="text-sm text-gray-600">
-            Page {page + 1} of {totalPages || 1}
-          </span>
-          <div className="flex gap-2">
-            <button
-              disabled={page === 0}
-              onClick={() => setPage(page - 1)}
-              className="px-3 py-1 border rounded disabled:opacity-50 cursor-pointer"
-            >
-              Previous
-            </button>
-            <button
-              disabled={page >= totalPages - 1}
-              onClick={() => setPage(page + 1)}
-              className="px-3 py-1 border rounded disabled:opacity-50 cursor-pointer"
-            >
-              Next
-            </button>
-          </div>
-        </div>
+        <Pagination
+          currentPage={page}
+          totalPages={totalPages}
+          onPageChange={(newPage) => setPage(newPage)}
+        />
       </div>
 
       <Modal
